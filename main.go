@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
-
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/awserr"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -27,7 +25,7 @@ func main() {
 	})
 	if awsErr, ok := err.(awserr.Error); ok && awsErr.Code() == iam.ErrCodeNoSuchEntityException {
 		outAIMUser, err := userIAM.CreateUser(&iam.CreateUserInput{
-			UserName: &os.Args[1],
+			UserName: aws.String("tester"),
 		})
 
 		if err != nil {
